@@ -15,7 +15,7 @@ requirements = [i.strip() for i in open(req_file).readlines()]
 
 setup_params = dict(
     name="sqlalchemy_monetdb",
-    version=__version__,
+    version='0.9.2',
     description="SQLAlchemy dialect for MonetDB",
     author="Gijs Molenaar",
     author_email="gijsmolenaar@gmail.com",
@@ -41,7 +41,7 @@ setup_params = dict(
             ["monetdb = sqlalchemy_monetdb.dialect:MonetDialect"]
     },
     license="MIT",
-    install_requires=requirements
+    install_requires=['pymonetdb <= 0.1', 'sqlalchemy'],
 )
 
 if __name__ == '__main__':
