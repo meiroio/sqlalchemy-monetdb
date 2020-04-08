@@ -22,6 +22,7 @@ class Requirements(SuiteRequirements):
     def datetime_microseconds(self):
         """monetdb doesn't support microsecond resolution"""
         return exclusions.closed()
+
     time_microseconds = datetime_microseconds
 
     @property
@@ -79,7 +80,6 @@ class Requirements(SuiteRequirements):
         TODO: disabled for now, but maybe we can enable this?
         """
         return exclusions.closed()
-
 
     @property
     def foreign_key_constraint_option_reflection(self):
@@ -153,7 +153,7 @@ class Requirements(SuiteRequirements):
         return exclusions.closed()
 
     @property
-    def broken_cx_oracle6_numerics(config):
+    def broken_cx_oracle6_numerics(self):
         return exclusions.closed()
 
     @property
@@ -164,4 +164,8 @@ class Requirements(SuiteRequirements):
     @property
     def unique_constraint_reflection(self):
         """target dialect supports reflection of unique constraints"""
+        return exclusions.closed()
+
+    @property
+    def cross_schema_fk_reflection(self):
         return exclusions.closed()
