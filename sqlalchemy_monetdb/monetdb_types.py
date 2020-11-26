@@ -1,6 +1,7 @@
 from sqlalchemy import types as sqltypes
 from sqlalchemy.types import INTEGER, BIGINT, SMALLINT, VARCHAR, CHAR, TEXT,\
     FLOAT, DATE, BOOLEAN, DECIMAL, TIMESTAMP, TIME, BLOB
+from sqlalchemy.dialects.postgresql import UUID
 
 
 class INET(sqltypes.TypeEngine):
@@ -43,4 +44,5 @@ MONETDB_TYPE_MAP = {
     'timestamp': TIMESTAMP,
     'timestamptz': TIMESTAMP,
     'varchar': VARCHAR,
+    'uuid': UUID
 }
