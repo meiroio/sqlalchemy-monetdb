@@ -126,3 +126,21 @@ class MonetCompiler(compiler.SQLCompiler):
                                                         fromhints=from_hints, **kw)
                                    for t in extra_froms)
 
+    def visit_function(self, func, add_to_result_map=None, **kwargs):
+        """
+        Copy-pasted parent function without the unsupported function name quoting.
+        """
+        if add_to_result_map is not None:
+            add_to_result_map(func.name, func.name, (), func.type)
+
+        disp = getattr(self, "visit_%s_func" % func.name.lower(), None)
+        if disp:
+            return disp(func, **kwargs)
+        else:
+            name = compiler.FUNCTIONS.get(func.__class__, None)
+            if name:
+                if func._has_args:
+                    name += "%(expr)s"
+            else:
+                name = func.name + "%(expr)s"
+            return ".".join(func.packagenames + [name]) % {"expr": self.function_argspec(func, **kwargs)}
